@@ -14,6 +14,7 @@ const getDataApi = async() => {
     const dataApi = await [...dataFirstPage, ...dataSecondPage, ...dataThirdPage];
     const games = await dataApi.map(game => {
         return {
+            id: game.id,
             name: game.name,
             description: game.slug,
             released: game.released,
