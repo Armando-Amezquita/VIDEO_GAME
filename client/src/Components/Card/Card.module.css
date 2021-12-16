@@ -1,0 +1,12 @@
+.img {
+    width: 25rem;
+    height: 15rem;
+}
+.article {
+    width: 30rem;
+    height: 20rem;
+    background-color: cadetblue;
+    border-radius: .5rem;
+    border: 1px solid cadetblue;
+    margin: 1rem;
+}

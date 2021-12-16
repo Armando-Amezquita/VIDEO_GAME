@@ -1,0 +1,27 @@
+.nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
+    height: 4rem;
+}
+.buttons{
+    width: 3rem;
+    height: 3rem;
+    margin: 0 .5rem;
+    background-color: darkslategray;
+    color: white;
+    font-size: 1rem;
+    border-radius: .5rem;
+    border: none;
+}
+.buttons:hover{
+    cursor: pointer;
+    background-color: yellow;
+    color: darkslategray;
+}
