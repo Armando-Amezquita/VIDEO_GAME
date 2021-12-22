@@ -20,7 +20,8 @@ const getDataApi = async() => {
             released: game.released,
             rating: game.rating,
             image: game.background_image,
-            platforms: game.platforms.map(ele => ele.platform).map(ele => ele.name)
+            platforms: game.platforms.map(ele => ele.platform).map(ele => ele.name),
+            genres: game.genres.map(ele => ele.name)
         }
     })    
     return games;

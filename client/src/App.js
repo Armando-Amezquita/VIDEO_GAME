@@ -6,6 +6,7 @@ import Home from './Views/Home/Home';
 import LandingPage from './Views/LandingPage/LandingPage';
 import Nav from './Components/Nav/Nav';
 import Details from './Views/Deatils/Details';
+import CreateVideogame from './Views/CreateVideogame/CreateVideogame';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
           <Route exact path='/' element={<LandingPage />} />
           <Route exact path='/home' element={<Home />} />
           <Route exact path='/videogame/:id' element={<Details />} />
-          {/* <Route exact path='/createDog' element={<CreateDog />} /> */}
+          <Route exact path='/createVideogame' element={<CreateVideogame />} />
       </Routes>
     </>
   );

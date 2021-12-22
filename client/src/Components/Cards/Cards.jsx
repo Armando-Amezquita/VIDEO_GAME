@@ -7,7 +7,7 @@ export default function Cards ({videogames}){
         <div className={styles.main}>
             {
                 videogames? videogames.map(game => (
-                    <Card key={game.id} id={game.id} name={game.name} image={game.image} released={game.released} rating={game.rating}/>
+                    <Card key={game.id} id={game.id} name={game.name} image={game.image} released={game.released} genre={game.genres} rating={game.rating}/>
                 ))
                 : <h1>Loading...</h1>
             }

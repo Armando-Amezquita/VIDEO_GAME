@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from './Card.module.css';
 
-export default function Card ({ name, description, released, rating, image, platforms, id }){
+export default function Card ({ name, description, released, rating, image, platforms, id, genres }){
     return(
         <article className={styles.article}>
             <Link to={`/videogame/${id}`}>
@@ -12,6 +12,7 @@ export default function Card ({ name, description, released, rating, image, plat
                 <p>{rating}</p>
                 <p>{platforms}</p>
                 <p>{description}</p>
+                <p>{genres}</p>
             </Link>
         </article>
     )

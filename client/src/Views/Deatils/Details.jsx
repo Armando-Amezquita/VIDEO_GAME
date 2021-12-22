@@ -10,7 +10,7 @@ export default function Details (){
 
     useEffect(()=>{
         dispatch(getVideoGamesDetails(id))
-        return () => {dispatch(deleteState())} // --------------------->>>>>>  REVISAAR  <<<<<<<-------------------------  
+        // return () => {dispatch(deleteState())} // --------------------->>>>>>  REVISAAR  <<<<<<<-------------------------  
     }, [dispatch, id]);
     
 
@@ -27,26 +27,10 @@ export default function Details (){
                         <img src={videogame[0].image} alt="" width='400rem' height='300rem' />
                         <p>{videogame[0].description}</p>
                         <p>{videogame[0].platforms}</p>
+                        <p>{videogame[0].genres}</p>
                     </div>
                 ): <h1>Cargando</h1>
             }
         </div>
     )
-    /* return (
-        <div>
-            <h1>Details</h1>
-            {
-                videogame && (
-                    <>
-                        <h1>{videogame.name}</h1>
-                        <p>{videogame.description}</p>
-                        <img src={videogame.image} alt="IMG" />
-                    </>
-                )
-            }
-            {
-                !videogame && <h1>Cargando...</h1>
-            }
-        </div>
-    ) */
 }

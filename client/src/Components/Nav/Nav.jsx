@@ -14,6 +14,9 @@ export default function Nav () {
             <Link to='/'>
                 <p className={styles.font}>Cerrar</p>
             </Link>
+            <Link to='/createVideogame'>
+                <p className={styles.font}>Crear videogame</p>
+            </Link>
         </nav>
     )
 }
