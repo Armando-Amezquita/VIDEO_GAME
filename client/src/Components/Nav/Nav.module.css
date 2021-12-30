@@ -3,13 +3,21 @@
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
-    height: 3.5rem;
-    background-color: darkslategrey;
+    height: 5rem;
+    background-color: #000;
+    border-bottom: 1px solid #21f3d0; 
 }
-
-.font {
+.font{
     color: white;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px yellow, 0 0 15px yellow, 0 0 30px yellow, 0 0 60px yellow;
+}
+.font:hover{
+    font-size: 1.5rem;
+}
+.underline{
     text-decoration: none;
-    
+}
+.underline:hover{
+    text-decoration: underline;
 }

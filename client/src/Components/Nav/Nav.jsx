@@ -5,16 +5,16 @@ import styles from './Nav.module.css'
 export default function Nav () {
     return (
         <nav className={styles.nav}>
-            <Link to='home'>
-                <h1 className={styles.font}>Logo</h1>
+            <Link to='home' className={styles.underline}>
+                <p className={styles.font} >Logo</p>
             </Link>
-            <Link to='/hola'>
+            <Link to='/hola' className={styles.underline}>
                 <p className={styles.font}>About</p>
             </Link>
-            <Link to='/'>
+            <Link to='/' className={styles.underline}>
                 <p className={styles.font}>Cerrar</p>
             </Link>
-            <Link to='/createVideogame'>
+            <Link to='/createVideogame' className={styles.underline}>
                 <p className={styles.font}>Crear videogame</p>
             </Link>
         </nav>

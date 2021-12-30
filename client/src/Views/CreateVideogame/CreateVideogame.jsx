@@ -89,42 +89,51 @@ export default function CreateVideogame (){
     }
 
     return (
-        <form className={styles.container} onSubmit={handleSubmit}>
-            {/* <Link to='/'> <button>Volver al home</button> </Link> */}
-            <label htmlFor="name">
-                name:
-                <input id='name' type="text" onChange={handleChange} name='name' />
-                {/* {errors.name && ( <p className='error'>{errors.name}</p>)} */}
-            </label>
-            <label htmlFor="description">
-                Description:
-                <input id='description' type="text" onChange={handleChange} name='description' />
-            </label>
-            <label htmlFor="released">
-                Released:
-                <input id='released' type="text" onChange={handleChange} name='released' />
-            </label>
-            <label htmlFor="rating">
-                Rating:
-                <input id='rating' type="text" onChange={handleChange} name='rating' />
-            </label>
-            <label htmlFor="image">
-                image:
-                <input id='image' type="text" onChange={handleChange} name='image' />
-            </label>
-            <label htmlFor="platform">
-            platform:
-                <input id='platform' type="text" onChange={handleChange} name='platform' />
-            </label>
-                <select name="" id="">
-                    {
-                        genres?.map(genre => (
-                            <option key={genre.id} onClick={handleChangeGenre} value={genre.name}>{genre.name}</option>
-                        ))
-                    }
-                </select>
-            <button disabled={button} type='submit' > Create Videogame </button>
-        </form>
+        <div className={styles.containerTotal}>
+            <div>
+            </div>
+            <div className={styles.containerForm}>
+                <form className={styles.Form} onSubmit={handleSubmit}>
+                    {/* <Link to='/'> <button>Volver al home</button> </Link> */}
+                    <h1 className={styles.titleForm}>Create a VideoGame</h1>
+                    <label htmlFor="name" className={styles.labels}>
+                        <span className={styles.text}>Name:</span>
+                        <input id='name'  type="text" onChange={handleChange} name='name' className={styles.inputForm} />
+                        {/* {errors.name && ( <p className='error'>{errors.name}</p>)} */}
+                        {/* en la etiqueta input required= va a obligar a ser un campo requerido */}
+                    </label>
+                    <label htmlFor="description" className={styles.labels}>
+                        <span className={styles.text}>Description:</span>
+                        <input id='description' type="text" onChange={handleChange} name='description' className={styles.inputForm} />
+                    </label>
+                    <label htmlFor="released" className={styles.labels}>
+                        <span className={styles.text}>Released:</span>
+                        <input id='released' type="text" onChange={handleChange} name='released' className={styles.inputForm}/>
+                    </label>
+                    <label htmlFor="rating" className={styles.labels}>
+                        <span className={styles.text}>Rating:</span>
+                        <input id='rating' type="text" onChange={handleChange} name='rating' className={styles.inputForm} />
+                    </label>
+                    <label htmlFor="image" className={styles.labels}>
+                        <span className={styles.text}>Image:</span>
+                        <input id='image' type="text" onChange={handleChange} name='image'className={styles.inputForm} />
+                    </label>
+                    <label htmlFor="platform" className={styles.labels}>
+                        <span className={styles.text}>Platform:</span>
+                        <input id='platform' type="text" onChange={handleChange} name='platform' className={styles.inputForm}/>
+                    </label>
+                        <select name="" id="">
+                            <option selected disabled>--Select--</option>
+                            {
+                                genres?.map(genre => (
+                                    <option key={genre.id} onClick={handleChangeGenre} value={genre.name}>{genre.name}</option>
+                                    ))
+                                }
+                        </select>
+                    <button disabled={button} type='submit' className={styles.buttonSend} > Create Videogame </button>
+                </form>
+            </div>
+        </div>
     )
 }
 

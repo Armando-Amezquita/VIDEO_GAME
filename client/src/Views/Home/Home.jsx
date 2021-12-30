@@ -4,7 +4,8 @@ import { useState } from "react";
 import Cards from "../../Components/Cards/Cards";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Paginado from "../../Components/Paginado/Paginado";
-import { getVideogames, orderByname, filterCreate, filterByGenre, filterByRating } from "../../Actions";
+import { orderByname, filterCreate, filterByGenre, filterByRating } from "../../Actions";
+import styles from './Home.module.css'
 
 export default function Home (){
 
@@ -24,11 +25,6 @@ export default function Home (){
     function pagination (e, page){
         e.preventDefault();
         setCurrentPage(page);
-    }
-    function volverCargar (e){
-        e.preventDefault();
-        dispatch(getVideogames());
-        console.log('Se actualizo')
     }
 
     function handelFilterByName(e) {
@@ -55,35 +51,70 @@ export default function Home (){
     }
 
     return(
-        <div>
-            <SearchBar />
-            <button onClick={volverCargar}>Volver a cargar</button>
-            <select onChange={e => handelFilterByName(e)}>
-                <option value="asc">Ascendente</option>
-                <option value="desc">Descendente</option>
-            </select>
-            <select onChange={e => handleFilterCreate(e)}>
-                    <option value="All">Todos</option>
-                    <option value="create">Creados</option>
-                    <option value="api">Existente</option>
-            </select>
-            <select onChange={e => handleFilterByGenre(e)}>
-                {
-                    genres?.map(genre => (
-                            <option key={genre.id} name={genre.name} value={genre.name}>{genre.name}</option>
-                    ))
-                }
-            </select>
-            <select onChange={handleFilterByRating}>
-                {
-                    videogames?.map(game => (
-                            <option key={game.id} name={game.name} value={game.rating}>{game.rating}</option>
-                    ))
-                }
-            </select>
-            <Paginado numOfPages={numOfPages} pagination={pagination}/>
+        <main className={styles.containerHome}>
+            <section className={styles.SearchBar}>
+                <SearchBar />
+            </section>
+            <section className={styles.containerFilters}>
+                <div className={styles.filterByName}>
+                    <div>
+                        <p className={styles.pOrderByName}>Order By Name</p>
+                    </div>
+                    <div>
+                        <select onChange={e => handelFilterByName(e)} className={styles}>
+                            <option selected disabled>--Selecciona--</option>
+                            <option value="asc">Ascendente</option>
+                            <option value="desc">Descendente</option>
+                        </select>
+                    </div>
+                </div>
+                <div className={styles.filterByCreateOrExisting}>
+                    <div>
+                        <p className={styles.pOrderByName}>Filter Create Or Existing</p>
+                    </div>
+                    <div>
+                        <select onChange={e => handleFilterCreate(e)}>
+                            <option selected disabled>--Selecciona--</option>
+                            <option value="All">Todos</option>
+                            <option value="create">Creados</option>
+                            <option value="api">Existente</option>
+                        </select>
+                    </div>
+                </div>
+                <div className={styles.filterByGenre}>
+                    <div>
+                    <p className={styles.pOrderByName}>Filter By Genre</p>
+                    </div>
+                    <div>
+                        <select className={styles.selects} onChange={e => handleFilterByGenre(e)}> {/* size='4' */}
+                            <option selected disabled>--Selecciona--</option>
+                            {
+                                genres?.map(genre => (
+                                    <option key={genre.id} name={genre.name} value={genre.name}>{genre.name}</option>
+                                    ))
+                                }
+                        </select>
+                    </div>
+                </div>
+                <div className={styles.filterByRating}>
+                    <div>
+                    <p className={styles.pOrderByName}>Filter By Rating</p>
+                    </div>
+                    <div>
+                        <select onChange={handleFilterByRating}>
+                            <option selected disabled>--Selecciona--</option>
+                            {
+                                videogames?.map(game => (
+                                    <option key={game.id} name={game.name} value={game.rating}>{game.rating}</option>
+                                    ))
+                                }
+                        </select>
+                    </div>
+                </div>
+            </section>
             <Cards videogames={currentVideoGamesItems} />
-        </div>
+            <Paginado numOfPages={numOfPages} pagination={pagination}/>
+        </main>
     )
 }
 

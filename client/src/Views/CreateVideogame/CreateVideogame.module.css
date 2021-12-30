@@ -1,11 +1,78 @@
-.container{
+.containerTotal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    height: auto;
+    margin: 4rem auto;
+    background-image:  url('../../Img/ufo-gf582f175c_1280.jpg');
+    background-position: left;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    box-shadow: 0 0 10px #21f3d0, 0 0 15px #21f3d0;
+    /* border-radius: 1rem; */
+}
+.Form{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    width: 600px;
-    height: 500px;
-    margin: 3rem;
-    border: 1px solid darkcyan;
+    width: 95%;
+    height: auto;
+    margin: 2rem 1rem;
+    padding: 2rem;
+    color: #fff;
+    background: rgba(5,7,12,0.75);
+    border-radius: 2rem;
+    border-bottom-left-radius: 17rem;
+    border-top-right-radius: 17rem;
+}
+.containerForm{
+    width: 60%;
+}
+
+/* ---------------->>>>>>> Form <<<<<<<<<------------------------ */
+.titleForm{
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px #21f3d0, 0 0 20px #21f3d0;
+}
+.labels{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: .5rem 0;
+}
+.inputForm{
+    width: 20rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #2b3636;
+    outline: 0px;
+    color: #fff;
+}
+.inputForm:focus{
+    box-shadow:inset 0 0 5px #548CFF, 0 0 5px #548CFF;
+    border-bottom: 2px solid #548cff;
+    padding: 0 1rem;
+    color:#fff;
+    border-radius: .5rem;
+}
+.buttonSend {
+    width: 10rem;
+    height: 2.4rem;
+    margin: 2rem 0;
     border-radius: 1rem;
+    border: none;
+    background-color: transparent;
+    color: white;
+    box-shadow: 0 0 10px white, 0 0 1.5px white;
+    font-size: 1rem;
+}
+.buttonSend:hover {
+    cursor: pointer;
+    color: #21f3d0;
+    box-shadow: 0 0 10px #21f3d0, 0 0 20px #21f3d0;
+    background-color: transparent;
 }

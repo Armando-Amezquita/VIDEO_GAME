@@ -5,10 +5,18 @@ import styles from "./LandingPage.module.css"
 export default function LandingPage(){
     return(
         <main className={styles.main}>
-            <h1 className={styles.h1}> Welcome </h1>
-            <Link to='/home'>
-                <button className={styles.button}>Start</button>
-            </Link>
+            <section className={styles.section}>
+                <p className={styles.title}> Welcome</p>
+                <Link to='/home'>
+                    <button className={styles.button}>Start</button>
+                </Link>
+                <div className={styles.subContainer}>
+                    <span className={styles.fliker1}>♥</span>
+                    <span className={styles.fliker2}>♦</span>
+                    <span className={styles.fliker3}>♣</span>
+                    <span className={styles.fliker3}>☻</span>
+                </div>
+            </section>
         </main>
     )
 }

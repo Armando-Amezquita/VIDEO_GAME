@@ -4,11 +4,59 @@
     align-items: center;
     width: 100%;
     height: 100vh;
-    background-image: url("../../Img/pexels-lucie-liz-3165335.jpg");
+    background-image:linear-gradient(rgba(5,7,12,0.9), rgba(5,7,12,0.4)), url("../../Img/given-g92044526a_1280.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
+.section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 20rem;
+    height: 20rem;
+    background: rgba(5,7,12,0.75);
+    border: 2px solid #fff;
+    box-shadow: inset 0 0 5px red, 0 0 5px red;
+    border-radius: 1rem;
+}
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 0 0 5px red, 0 0 15px red, 0 0 30px red, 0 0 50px red;
+}
+.subContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+    letter-spacing: 8px;
+    text-shadow: 0 0 5px #fff, 0 0 15px #fff, 0 0 30px #fff;
+}
+.fliker1 {
+    animation: parpadear 2s infinite backwards;
+    
+}
+.fliker2 {
+    animation: parpadear 2.5s infinite backwards;
+}
+.fliker3 {
+    animation: parpadear 1.5s infinite backwards;
+}
+@keyframes parpadear{
+    to{
+        color: gray;
+        text-shadow: none;
+    }
 }
 .button{
     width: 8rem;
@@ -17,16 +65,15 @@
     border-radius: .5rem;
     font-size: 1.5rem ;
     border: none;
-    background-color: lightseagreen;
-    color: white;
+    background-color: transparent;
+    color: #21f3d0;
+    box-shadow: 0 0 10px #21f3d0, 0 0 40px #21f3d0, 0 0 80px #21f3d0;
 
 }
 .button:hover {
     cursor: pointer;
-    background-color: white;
-    color: lightseagreen;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: 0 0 10px #fff, 0 0 40px #fff, 0 0 80px #fff;
 }
-.h1 {
-    font-size: 4rem;
-    color: aliceblue;
-}
+

@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 2rem 0;
 }
 .container{
     display: flex;
@@ -14,14 +15,16 @@
     width: 3rem;
     height: 3rem;
     margin: 0 .5rem;
-    background-color: darkslategray;
-    color: white;
+    background-color: transparent;
+    color: #21f3d0;
+    box-shadow: 0 0 10px #21f3d0, 0 0 1.5px #21f3d0;
     font-size: 1rem;
     border-radius: .5rem;
     border: none;
 }
 .buttons:hover{
     cursor: pointer;
-    background-color: yellow;
-    color: darkslategray;
+    color: #fff;
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    background-color: transparent;
 }
