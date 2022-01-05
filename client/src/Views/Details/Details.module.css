@@ -6,18 +6,18 @@
 
 }
 .card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4rem 2rem;
     width: 80%;
     height: auto;
     margin: 0 auto;
-    padding: 4rem 2rem;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     box-shadow:inset 0 0 10px #548CFF, 0 0 20px #548CFF, 0 0 30px #548CFF, 0 0 60px #548CFF;
     border-radius: 1rem;
 }
 .title{
-    width: 24rem;
+    width: auto;
     margin: 0 auto;
     text-align: center;
     padding-top: 2rem;
@@ -29,8 +29,8 @@
     background-color: transparent;
 }
 .imgDetails{
-    width: 30rem;
-    height: 25rem;
+    width: 27rem;
+    height: 20rem;
     border-radius: 1rem;
     border-bottom-right-radius: 20rem;
 }
@@ -53,15 +53,16 @@
 .titlePlatforms{
     font-size: 1.3rem;
     margin: 1rem 0;
-    text-shadow: 0 0 10px #EA5C2B, 0 0 20px #EA5C2B;
+    color: #21f3d0;
 }
 .containerDivision{
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: flex-start;
 }
 .containerPlaforms{
     width: 50%;
+    height: auto;
 }
 .containerGenre{
     width: 40%;
@@ -78,4 +79,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.subTitles{
+    color:#21f3d0;
 }

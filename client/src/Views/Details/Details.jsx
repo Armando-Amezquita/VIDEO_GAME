@@ -11,15 +11,15 @@ export default function Details (){
 
     useEffect(()=>{
         dispatch(getVideoGamesDetails(id))
-        // return () => {dispatch(deleteState())} // --------------------->>>>>>  REVISAAR  <<<<<<<-------------------------  
+        // return () => {dispatch(deleteState())} // --------------------->>>>>>  REVISAAR  <<<<<<<-------------------------
     }, [dispatch, id]);
-    
+
 
     if(videogame && Array.isArray(videogame)){
     return (
         <>
         <div className={styles.detailsContainer}>
-            
+
             {
                 videogame && (Array.isArray(videogame))?(
                 <>
@@ -33,17 +33,17 @@ export default function Details (){
                             <div className={styles.containerDivision}>
                                 <div className={styles.containerPlaforms}>
                                     <p className={styles.titlePlatforms}>Platforms</p>
-                                    <ul>{videogame[0].platforms.map(platform => ( <li className={styles.biñeta}>{platform}</li>))}</ul>
+                                    <ul>{videogame[0].platforms.map((platform, id) => ( <li key={id} className={styles.biñeta}>{platform}</li>))}</ul>
+                                    <p className={styles.titlePlatforms}>Released</p>
+                                    <li li className={styles.biñeta}>{videogame[0].released}</li>
                                 </div>
                                 <div className={styles.containerGenre}>
                                     <p className={styles.titlePlatforms}>Genres</p>
-                                    <ul>{videogame[0].genres.map(genre => ( <li className={styles.biñeta}>{genre}</li>))}</ul>
+                                    <ul>{videogame[0].genres.map((genre, id) => ( <li key={id} className={styles.biñeta}>{genre}</li>))}</ul>
                                     <p className={styles.titlePlatforms}>Rating</p>
-                                    <ul><li className={styles.biñeta}>{videogame[0].rating}</li></ul>
+                                    <ul><li key={videogame[0].rating} className={styles.biñeta}>{videogame[0].rating}</li></ul>
                                 </div>
                             </div>
-                            <p className={styles.titlePlatforms}>Released</p>
-                            <li className={styles.biñeta}>{videogame[0].released}</li>
                         </div>
                     </div>
                 </>
@@ -56,7 +56,7 @@ export default function Details (){
     else {
         return (
             <>
-            <div className={styles.detailsContainer}>                
+            <div className={styles.detailsContainer}>
                 {
                     videogame && (typeof videogame === 'object')?(
                     <>
@@ -70,17 +70,17 @@ export default function Details (){
                                 <div className={styles.containerDivision}>
                                     <div className={styles.containerPlaforms}>
                                         <p className={styles.titlePlatforms}>Platforms</p>
-                                        <ul> <li>{videogame.platform} </li></ul>
+                                        <ul><li className={styles.biñeta}>{videogame.platform} </li></ul>
+                                        <p className={styles.titlePlatforms}> Released</p>
+                                        <ul><li className={styles.biñeta}>{videogame.released}</li></ul>
                                     </div>
                                     <div className={styles.containerGenre}>
                                         <p className={styles.titlePlatforms}>Genres</p>
-                                        <ul>{videogame.genres.map(genre => ( <li className={styles.biñeta}>{genre}</li>))}</ul>
+                                        <ul>{videogame.genres.map((genre, id) => ( <li key={id} className={styles.biñeta}>{genre.name}</li>))}</ul>
                                         <p className={styles.titlePlatforms}>Rating</p>
                                         <ul><li className={styles.biñeta}>{videogame.rating}</li></ul>
                                     </div>
                                 </div>
-                                <p className={styles.titlePlatforms}>Released</p>
-                                <li className={styles.biñeta}>{videogame.released}</li>
                             </div>
                         </div>
                     </>

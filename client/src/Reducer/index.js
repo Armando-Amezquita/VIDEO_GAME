@@ -1,11 +1,13 @@
-import { GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_DETAILS, DELETE_STATE, ORDER_BY_NAME, FILTER_CREATE, FILTER_BY_GENRE, FILTER_BY_RATING, GET_NAME_VIDEOGAME } from "../Actions/Constantes"
+import { GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_DETAILS, DELETE_STATE, ORDER_BY_NAME, FILTER_CREATE, FILTER_BY_GENRE, FILTER_BY_RATING, GET_NAME_VIDEOGAME, POST_VIDEOGAME, GET_PLATFORMS } from "../Actions/Constantes"
 
 const initialState = {
-    videogames: [],
+    videogames: [], // -----> este siempre va hacer el Array que debo mostrar
     allVideogames: [],
     genres: [],
-    videoGameDetails: {}
+    videoGameDetails: {},
+    platforms: []
 }
+
 
 export default function rootReducer(state = initialState, action){
     switch (action.type) {
@@ -19,6 +21,15 @@ export default function rootReducer(state = initialState, action){
             return {
                 ...state,
                 genres: action.payload.data
+            }
+        case GET_PLATFORMS: 
+            return{
+                ...state,
+                platforms: action.payload.data
+            }
+        case POST_VIDEOGAME:
+            return {
+                ...state
             }
         case GET_VIDEOGAMES_DETAILS: 
             return{
@@ -63,21 +74,10 @@ export default function rootReducer(state = initialState, action){
         case FILTER_BY_GENRE: 
             const allVideogames2 = state.allVideogames;
             const videoGamesFilter = allVideogames2.filter(ele => ele.genres.includes(action.payload));
-            // const videoGamesFilterDb = allVideogames2.filter(ele => ele.genres.filter(ele => ele.name.includes(action.payload)))
-            // console.log(videoGamesFilterDb)
-            // const videoGamesFilter = []
-            // if(totalFilter){
-            //     for (let i = 0; i < allVideogames2.length; i++) {
-            //         if(allVideogames2[i].genres.includes(totalFilter[0].name)){
-            //             videoGamesFilter.push(allVideogames2[i])
-            //         }
-            //     }
-            // };
             return {
                 ...state,
                 videogames: videoGamesFilter
             }
-
         case FILTER_BY_RATING: 
             const allVideogames3 = state.allVideogames;
             parseFloat(action.payload);
@@ -91,6 +91,7 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 videogames: action.payload
                 }
+        
         default:
             return {
                 state

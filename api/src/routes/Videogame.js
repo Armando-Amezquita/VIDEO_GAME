@@ -7,7 +7,7 @@ const router = Router();
 router.post('/', async(req,res, next) => {
     const { name, description, released, genre, rating,image, platform } = await req.body;
     if(!name || !description || !platform){
-        res.json({error: 500, message: 'Se deben llenar todos lo campos necesarios'});
+        res.json({error: 500, message: 'Se deben llenar todos los campos necesarios'});
     }
     try{
         const createVideogame = await Videogame.create({name, released, rating, description, platform, image})

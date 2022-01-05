@@ -18,6 +18,6 @@ router.get('/', async(req,res) => {
     else {
         res.json(data);
     }
-})
+});
 
 module.exports = router;

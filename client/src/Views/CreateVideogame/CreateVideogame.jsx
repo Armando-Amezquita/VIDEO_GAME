@@ -1,22 +1,40 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import {getGenres, postVideogame, getPlatforms} from '../../Actions/index';
 import styles from './CreateVideogame.module.css'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-// function validate (input){
-//     let errors = {};
-//     if(!input.name){
-//         errors.name = 'Se requiere un nombre';
-//     }
-//     else if(!input.description){
-//         errors.description = 'El nickname debe estar completo';
-//     }
-//     return errors;
-// }
+
+function validate (input){
+    let errors = {};
+    const regexRating = /^[0-5]$/g;
+    const regexName = /^[A-Z]/g;
+    const regexDescription = /^[A-Z]/g;
+
+    if(!input.name) errors.name = 'Needs to enter a name ';
+    else if (!regexName.test(input.name)) {errors.name = 'The first letter must be uppercase'}
+    else{errors.name = ''};
+    
+    if(!input.description) errors.description = 'Needs to enter a description';
+    else if (!regexDescription.test(input.description)) {errors.description = 'The first letter must be uppercase'}
+    else{errors.description = ''};
+
+    if(!input.released) errors.released = 'Is require date';
+    else{errors.released = ''};
+
+    if(input.rating === '') errors.rating = 'Is require rating';
+    else if (!regexRating.test(input.rating)) {errors.rating = 'You can only enter numbers from 1 to 5'}
+    else{errors.rating = ''};
+
+    return errors;
+}
 
 export default function CreateVideogame (){
 
-    const genres = useSelector(state=> state.genres);
+    const genres = useSelector(state => state.genres);
+    const platforms = useSelector(state => state.platforms);
+    const dispatch = useDispatch()
+    // const history = useHistory();
+
 
     const [state, setState] = useState({
         name: '',
@@ -24,8 +42,8 @@ export default function CreateVideogame (){
         released: '',
         rating: '',
         genre: [],
-        platforms: [],
-        platform: ''
+        platform: [],
+        image: ''
     });
 
     const [button, setButton] = useState(true);
@@ -35,108 +53,199 @@ export default function CreateVideogame (){
         description: '',
         released: '',
         rating: '',
-        platform: '',
         genre: [],
-        platforms: [],
-        image: ''
+        platform: []
     }) 
+
+    useEffect(() => {
+        dispatch(getPlatforms);
+    }, []);
+    
+        useEffect(() => {
+            dispatch(getGenres);
+        }, []);
 
     useEffect(()=>{
         state.name && state.description && 
-        state.released && state.rating && 
-        state.image ? setButton(false) : setButton(true);
-    },[state])
+        state.released && state.rating
+        ? setButton(false) : setButton(true);
+    },[state]);
+
+
+    const handleImage = (e) => {
+        const regexImage = /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/;
+        if(e.target.value !== regexImage.test(e.target.value)){
+            setState({
+                ...state,
+                image: 'https://www.pcquest.com/wp-content/uploads/2015/06/the-games-logo-272khb4.jpg'
+            })
+        }
+    }
 
     const handleChange = (e) => {
+        e.preventDefault();
         setState({
             ...state,
             [e.target.name]: e.target.value
-    })
-    
-    
-    //Validacion de errores 
-    // setErrors(validate({
-    //     ...errors,
-    //     [e.target.name]: e.target.value
-    // })) 
-
+        })
+        setErrors(
+            validate({
+                ...state,
+                [e.target.name]: e.target.value
+            })
+        ) 
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        //axios.post(constantes.DOGS_URL, input)
-        axios.post(`http://localhost:3001/videogame`, state) //-----> Cambiar por constantes
+        dispatch(postVideogame(state))
+        alert('Personaje Creado')
+        console.log(e)
+        setState({
+            name: '',
+            description: '',
+            released: '',
+            rating: '',
+            genre: [],
+            platform: [],
+            image: ''
+        })
     }
-
-    // import {useHistory} from 'react-router-dom'
-    // const history = useHistory()
-    /* hay algo que se puede hacer cuando se crea el personaje y se hace con algo de react  
-        en la function que crea el personaje puedo redigir a alguna ruta cuando se cree el personaje
-        history.push('/home)
-        */
-
-        
-    /* 
-        y dberia renderizar asi:
-        <ul><li>{input.temperament.map(ele => ele +  ' ,'</li></ul>
-    } */
 
     function handleChangeGenre (e){
         e.preventDefault();
         setState({
             ...state,
-            genres: [...state.genre, e.target.value]
+            genre: [...state.genre, e.target.value]
         });
     }
+    function handleChangePlatform (e){
+        e.preventDefault();
+        setState({
+            ...state,
+            platform: [...state.platform, e.target.value]
+        })
+    }
+    function handelDeleteGenre(e){
+        setState({
+            ...state,
+            genre: state.genre.filter( ele => ele !== e)
+        })
+    }
+    function handelDeletePlatform(e){
+        setState({
+            ...state,
+            platform: state.platform.filter( ele => ele !== e)
+        })
+    }
+
 
     return (
         <div className={styles.containerTotal}>
             <div>
             </div>
             <div className={styles.containerForm}>
-                <form className={styles.Form} onSubmit={handleSubmit}>
-                    {/* <Link to='/'> <button>Volver al home</button> </Link> */}
+                <form id='formulario' className={styles.Form} onSubmit={handleSubmit}>
                     <h1 className={styles.titleForm}>Create a VideoGame</h1>
                     <label htmlFor="name" className={styles.labels}>
                         <span className={styles.text}>Name:</span>
-                        <input id='name'  type="text" onChange={handleChange} name='name' className={styles.inputForm} />
-                        {/* {errors.name && ( <p className='error'>{errors.name}</p>)} */}
-                        {/* en la etiqueta input required= va a obligar a ser un campo requerido */}
+                        <input id='name' type="text" onChange={handleChange} name='name' className={styles.inputForm} />
+                        {
+                            errors.name && (
+                                <p className={styles.errors}>{errors.name}</p>
+                            )
+                        }
                     </label>
                     <label htmlFor="description" className={styles.labels}>
                         <span className={styles.text}>Description:</span>
                         <input id='description' type="text" onChange={handleChange} name='description' className={styles.inputForm} />
+                        {
+                            errors.description && (
+                                <p className={styles.errors}>{errors.description}</p>
+                            )
+                        }
                     </label>
                     <label htmlFor="released" className={styles.labels}>
                         <span className={styles.text}>Released:</span>
-                        <input id='released' type="text" onChange={handleChange} name='released' className={styles.inputForm}/>
+                        <input id='released' type="date" onChange={handleChange} name='released' className={styles.inputFormDate}/>
+                        {
+                            errors.released && (
+                                <p className={styles.errors}> {errors.released}</p>
+                            )
+                        }
                     </label>
                     <label htmlFor="rating" className={styles.labels}>
                         <span className={styles.text}>Rating:</span>
                         <input id='rating' type="text" onChange={handleChange} name='rating' className={styles.inputForm} />
+                        {
+                            errors.rating && (
+                                <p className={styles.errors}> {errors.rating}</p>
+                            )
+                        }
                     </label>
                     <label htmlFor="image" className={styles.labels}>
                         <span className={styles.text}>Image:</span>
-                        <input id='image' type="text" onChange={handleChange} name='image'className={styles.inputForm} />
+                        <input id='image' type="text" onChange={handleImage} name='image'className={styles.inputForm} />
                     </label>
-                    <label htmlFor="platform" className={styles.labels}>
-                        <span className={styles.text}>Platform:</span>
-                        <input id='platform' type="text" onChange={handleChange} name='platform' className={styles.inputForm}/>
-                    </label>
-                        <select name="" id="">
-                            <option selected disabled>--Select--</option>
+                    <div className={styles.containerGenresPlatformsInputs}>
+                        <select name="genre" onChange={handleChangeGenre} >
+                            <option selected disabled>--Genres--</option>
                             {
                                 genres?.map(genre => (
-                                    <option key={genre.id} onClick={handleChangeGenre} value={genre.name}>{genre.name}</option>
+                                    <option key={genre.id} value={genre.name}>{genre.name}</option>
                                     ))
                                 }
                         </select>
+                        <select name="platform" onChange={handleChangePlatform} >
+                            <option selected disabled>--Platforms--</option>
+                            {
+                                platforms?.map(platform => (
+                                    <option key={platform.id} value={platform.name}>{platform.name}</option>
+                                    ))
+                                }
+                        </select>
+                    </div>
                     <button disabled={button} type='submit' className={styles.buttonSend} > Create Videogame </button>
                 </form>
+
+                {/* ------------------->>>>>>>>>>> Renderizado de generos y plataformas escogidas <<<<<<<<--------- */}
+                <div className={styles.containerGenresPlatforms}>
+                    <div className={styles.containerGenresState}>
+                        <div>
+                            <h3 className={styles.genresSeletedTitle}>Genres Seleted</h3>
+                        </div>
+                        <div>
+                        {
+                            state.genre?.map((genre, id) => 
+                            <div key={id} name={genre} className={styles.containerStateGenres}>
+                                    <p className={styles.pStateGenres}>{genre}</p>
+                                    <button className={styles.buttonStateGenres} onClick={() => handelDeleteGenre(genre)}> x </button>
+                                </div>
+                            )
+                        }
+                        </div>
+                    </div>
+                    <div className={styles.containerGenresState}>
+                        <div>
+                            <h3 className={styles.genresSeletedTitle}>Platforms Seleted</h3>
+                        </div>
+                        <div>
+                        {
+                            state.platform?.map((platform, id) => 
+                            <div key={id} name={platform} className={styles.containerStateGenres}>
+                                    <p className={styles.pStateGenres}>{platform}</p>
+                                    <button className={styles.buttonStateGenres} onClick={() => handelDeletePlatform(platform)}> x </button>
+                                </div>
+                            )
+                        }
+                        </div>    
+                    </div>
+                </div>
             </div>
         </div>
     )
 }
 
-/* [
-[ ] Posibilidad de seleccionar/agregar varios géneros
-[ ] Posibilidad de seleccionar/agregar varias plataformas */
+/* 
+[ ] Posibilidad de seleccionar/agregar varias plataformas
+
+} */

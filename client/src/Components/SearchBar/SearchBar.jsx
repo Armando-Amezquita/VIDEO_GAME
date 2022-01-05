@@ -5,7 +5,9 @@ import styles from './SearchBar.module.css'
 
 export default function SearchBar (){
 
-    const [state, setState] = useState('');
+    const [state, setState] = useState({
+        name: ''
+    });
     const dispatch = useDispatch();
     
     function handelReload (e){
@@ -15,13 +17,13 @@ export default function SearchBar (){
 
     function handelChange (e){
         e.preventDefault();
-        setState(e.target.value);
-        console.log(state)
+        setState({name: e.target.value});
     }
 
     function handelSubmit(e){
         e.preventDefault()
-        dispatch(getNameCharacters(state))
+        dispatch(getNameCharacters(state.name))
+        setState({name: ''})
     }
 
     return(

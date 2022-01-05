@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getVideogames, getGenres } from './Actions/index';
+import { getVideogames, getGenres, getPlatforms } from './Actions/index';
 import Home from './Views/Home/Home';
 import LandingPage from './Views/LandingPage/LandingPage';
 // import Nav from './Components/Nav/Nav';
@@ -16,6 +16,7 @@ function App() {
   useEffect(() => {
     dispatch(getVideogames());
     dispatch(getGenres());
+    dispatch(getPlatforms());
   }, [dispatch]);
 
   return (
