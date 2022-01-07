@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getVideoGamesDetails, deleteState } from "../../Actions";
+import { getVideoGamesDetails, deleteState, getDetails } from "../../Actions";
 import styles from './Details.module.css';
 
 export default function Details (){
@@ -11,83 +11,124 @@ export default function Details (){
 
     useEffect(()=>{
         dispatch(getVideoGamesDetails(id))
-        // return () => {dispatch(deleteState())} // --------------------->>>>>>  REVISAAR  <<<<<<<-------------------------
+        // dispatch(getDetails(id));
+        return () => {dispatch(deleteState())} 
     }, [dispatch, id]);
 
-
-    if(videogame && Array.isArray(videogame)){
     return (
         <>
-        <div className={styles.detailsContainer}>
-
-            {
-                videogame && (Array.isArray(videogame))?(
-                <>
-                    <h1 className={styles.title} >{videogame[0].name}</h1>
-                    <div className={styles.card}>
-                        <div className={styles.containerImg}>
-                            <img src={videogame[0].image} alt="" className={styles.imgDetails} />
-                        </div>
-                        <div className={styles.containerCardDetails}>
-                            <h3 className={styles.titleDetails}>Details</h3>
-                            <div className={styles.containerDivision}>
-                                <div className={styles.containerPlaforms}>
-                                    <p className={styles.titlePlatforms}>Platforms</p>
-                                    <ul>{videogame[0].platforms.map((platform, id) => ( <li key={id} className={styles.biñeta}>{platform}</li>))}</ul>
-                                    <p className={styles.titlePlatforms}>Released</p>
-                                    <li li className={styles.biñeta}>{videogame[0].released}</li>
-                                </div>
-                                <div className={styles.containerGenre}>
-                                    <p className={styles.titlePlatforms}>Genres</p>
-                                    <ul>{videogame[0].genres.map((genre, id) => ( <li key={id} className={styles.biñeta}>{genre}</li>))}</ul>
-                                    <p className={styles.titlePlatforms}>Rating</p>
-                                    <ul><li key={videogame[0].rating} className={styles.biñeta}>{videogame[0].rating}</li></ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </>
-                ): <p className={styles.loading}></p>
-            }
-        </div>
-        </>
-    )
-    }
-    else {
-        return (
-            <>
             <div className={styles.detailsContainer}>
                 {
-                    videogame && (typeof videogame === 'object')?(
-                    <>
+                    videogame?.length > 0?( videogame?.map(videogame => {
+                        return (
+                        <>
                         <h1 className={styles.title} >{videogame.name}</h1>
                         <div className={styles.card}>
                             <div className={styles.containerImg}>
-                                <img src={videogame.image} alt="" className={styles.imgDetails} />
+                                <img src={videogame?.image} alt="" className={styles.imgDetails} />
                             </div>
                             <div className={styles.containerCardDetails}>
                                 <h3 className={styles.titleDetails}>Details</h3>
                                 <div className={styles.containerDivision}>
                                     <div className={styles.containerPlaforms}>
                                         <p className={styles.titlePlatforms}>Platforms</p>
-                                        <ul><li className={styles.biñeta}>{videogame.platform} </li></ul>
-                                        <p className={styles.titlePlatforms}> Released</p>
-                                        <ul><li className={styles.biñeta}>{videogame.released}</li></ul>
+                                        <ul>{videogame?.platforms.map((platform, id) => ( <li key={id} className={styles.biñeta}>{platform}</li>))}</ul>
+                                        <p className={styles.titlePlatforms}>Released</p>
+                                        <li className={styles.biñeta}>{videogame?.released}</li>
                                     </div>
                                     <div className={styles.containerGenre}>
                                         <p className={styles.titlePlatforms}>Genres</p>
-                                        <ul>{videogame.genres.map((genre, id) => ( <li key={id} className={styles.biñeta}>{genre.name}</li>))}</ul>
+                                        <ul>{videogame?.genres.map((genre, id) => ( <li key={id} className={styles.biñeta}>{genre}</li>))}</ul>
                                         <p className={styles.titlePlatforms}>Rating</p>
-                                        <ul><li className={styles.biñeta}>{videogame.rating}</li></ul>
+                                        <ul><li key={videogame?.rating} className={styles.biñeta}>{videogame?.rating}</li></ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </>
-                    ): <p className={styles.loading}></p>
+                        )
+                    })
+                    ):( <p className={styles.loading}></p>)
                 }
             </div>
-            </>
-        )
-    }
+        </>
+    )
+
+    // if(videogame === Array.isArray){
+    // return (
+    //     <>
+    //         <div className={styles.detailsContainer}>
+    //             {
+    //                 videogame? ( videogame?.map(videogame => {
+    //                     return (
+    //                     <>
+    //                     <h1 className={styles.title} >{videogame.name}</h1>
+    //                     <div className={styles.card}>
+    //                         <div className={styles.containerImg}>
+    //                             <img src={videogame?.image} alt="" className={styles.imgDetails} />
+    //                         </div>
+    //                         <div className={styles.containerCardDetails}>
+    //                             <h3 className={styles.titleDetails}>Details</h3>
+    //                             <div className={styles.containerDivision}>
+    //                                 <div className={styles.containerPlaforms}>
+    //                                     <p className={styles.titlePlatforms}>Platforms</p>
+    //                                     <ul>{videogame?.platforms.map((platform, id) => ( <li key={id} className={styles.biñeta}>{platform}</li>))}</ul>
+    //                                     <p className={styles.titlePlatforms}>Released</p>
+    //                                     <li className={styles.biñeta}>{videogame?.released}</li>
+    //                                 </div>
+    //                                 <div className={styles.containerGenre}>
+    //                                     <p className={styles.titlePlatforms}>Genres</p>
+    //                                     <ul>{videogame?.genres.map((genre, id) => ( <li key={id} className={styles.biñeta}>{genre}</li>))}</ul>
+    //                                     <p className={styles.titlePlatforms}>Rating</p>
+    //                                     <ul><li key={videogame?.rating} className={styles.biñeta}>{videogame?.rating}</li></ul>
+    //                                 </div>
+    //                             </div>
+    //                         </div>
+    //                     </div>
+    //                 </>
+    //                     )
+    //                 })
+    //                 ):( <p className={styles.loading}></p>)
+    //             }
+    //         </div>
+    //     </>
+    // )
+    // } else {
+    //     return (
+    //     <>
+    //         <div className={styles.detailsContainer}>
+    //             <h1 className={styles.title} >{videogame?.name}</h1>
+    //             <div className={styles.card}>
+    //                 <div className={styles.containerImg}>
+    //                     <img src={videogame?.image} alt="" className={styles.imgDetails} />
+    //                 </div>
+    //                 <div className={styles.containerCardDetails}>
+    //                     <h3 className={styles.titleDetails}>Details</h3>
+    //                     <div className={styles.containerDivision}>
+    //                         <div className={styles.containerPlaforms}>
+    //                             <p className={styles.titlePlatforms}>Platforms</p>
+    //                             {
+    //                                 videogame?.platforms? <ul>{videogame?.platforms?.map((ele, id) => ( <li className={styles.biñeta} key={id}>{ele}</li>))}</ul> 
+    //                                 : <ul>{videogame?.platform?.map((ele, id) => ( <li className={styles.biñeta} key={id}>{ele}</li>))}</ul>
+    //                             }
+    //                             <p className={styles.titlePlatforms}>Released</p>
+    //                             <li className={styles.biñeta}>{videogame?.released}</li>
+    //                         </div>
+    //                         <div className={styles.containerGenre}>
+    //                             <p className={styles.titlePlatforms}>Genres</p>
+    //                             <ul>{videogame?.genres?.map((ele, id) => ( <li key={id} className={styles.biñeta} > {ele} </li>))}</ul>
+    //                             <p className={styles.titlePlatforms}>Rating</p>
+    //                             <ul><li key={videogame?.rating} className={styles.biñeta}>{videogame?.rating}</li></ul>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             <div className={styles.containerDescription}>
+    //                 <h2 className={styles.titleDescription}>Description</h2>
+    //                 <p className={styles.pDescription}>{videogame?.description}</p>
+    //             </div>
+    //         </div>
+    //     </>
+    //     )
+    // }
 }

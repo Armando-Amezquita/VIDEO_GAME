@@ -32,8 +32,7 @@ export default function CreateVideogame (){
 
     const genres = useSelector(state => state.genres);
     const platforms = useSelector(state => state.platforms);
-    const dispatch = useDispatch()
-    // const history = useHistory();
+    const dispatch = useDispatch();
 
 
     const [state, setState] = useState({
@@ -74,7 +73,7 @@ export default function CreateVideogame (){
 
     const handleImage = (e) => {
         const regexImage = /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/;
-        if(e.target.value !== regexImage.test(e.target.value)){
+        if(e.target.value !== regexImage.test(e.target.value) || !e.target.value){
             setState({
                 ...state,
                 image: 'https://www.pcquest.com/wp-content/uploads/2015/06/the-games-logo-272khb4.jpg'
@@ -98,8 +97,7 @@ export default function CreateVideogame (){
     const handleSubmit = async(e) => {
         e.preventDefault();
         dispatch(postVideogame(state))
-        alert('Personaje Creado')
-        console.log(e)
+        alert('Videogame Created')
         setState({
             name: '',
             description: '',
@@ -148,7 +146,7 @@ export default function CreateVideogame (){
                     <h1 className={styles.titleForm}>Create a VideoGame</h1>
                     <label htmlFor="name" className={styles.labels}>
                         <span className={styles.text}>Name:</span>
-                        <input id='name' type="text" onChange={handleChange} name='name' className={styles.inputForm} />
+                        <input id='name' value={state.name} type="text" onChange={handleChange} name='name' className={styles.inputForm} />
                         {
                             errors.name && (
                                 <p className={styles.errors}>{errors.name}</p>
@@ -157,7 +155,7 @@ export default function CreateVideogame (){
                     </label>
                     <label htmlFor="description" className={styles.labels}>
                         <span className={styles.text}>Description:</span>
-                        <input id='description' type="text" onChange={handleChange} name='description' className={styles.inputForm} />
+                        <input id='description' value={state.description} type="text" onChange={handleChange} name='description' className={styles.inputForm} />
                         {
                             errors.description && (
                                 <p className={styles.errors}>{errors.description}</p>
@@ -166,7 +164,7 @@ export default function CreateVideogame (){
                     </label>
                     <label htmlFor="released" className={styles.labels}>
                         <span className={styles.text}>Released:</span>
-                        <input id='released' type="date" onChange={handleChange} name='released' className={styles.inputFormDate}/>
+                        <input id='released' value={state.released} type="date" onChange={handleChange} name='released' className={styles.inputFormDate}/>
                         {
                             errors.released && (
                                 <p className={styles.errors}> {errors.released}</p>
@@ -175,7 +173,7 @@ export default function CreateVideogame (){
                     </label>
                     <label htmlFor="rating" className={styles.labels}>
                         <span className={styles.text}>Rating:</span>
-                        <input id='rating' type="text" onChange={handleChange} name='rating' className={styles.inputForm} />
+                        <input id='rating' value={state.rating} type="text" onChange={handleChange} name='rating' className={styles.inputForm} />
                         {
                             errors.rating && (
                                 <p className={styles.errors}> {errors.rating}</p>
@@ -184,7 +182,7 @@ export default function CreateVideogame (){
                     </label>
                     <label htmlFor="image" className={styles.labels}>
                         <span className={styles.text}>Image:</span>
-                        <input id='image' type="text" onChange={handleImage} name='image'className={styles.inputForm} />
+                        <input id='image' value={state.image} type="text" onChange={handleImage} name='image'className={styles.inputForm} />
                     </label>
                     <div className={styles.containerGenresPlatformsInputs}>
                         <select name="genre" onChange={handleChangeGenre} >
@@ -244,8 +242,3 @@ export default function CreateVideogame (){
         </div>
     )
 }
-
-/* 
-[ ] Posibilidad de seleccionar/agregar varias plataformas
-
-} */

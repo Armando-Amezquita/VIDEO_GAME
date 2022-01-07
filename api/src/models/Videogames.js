@@ -25,14 +25,14 @@ module.exports = (sequelize) => {
       type: DataTypes.FLOAT,
       allowNull: true
     },
-    // platform: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false
-    // },
     image: {
       type: DataTypes.STRING,
       allowNull: true,
       defaultValue: 'https://i.blogs.es/27d6c6/halo-infinite1/1366_2000.jpeg'
+    },
+    platform: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
     },
     createInDb: {
       type: DataTypes.BOOLEAN,

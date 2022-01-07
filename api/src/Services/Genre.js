@@ -3,11 +3,18 @@ const axios = require('axios')
 
 
 const getGenres = async() => {
-    const dataApi = await axios.get(API_URL_GENRES);
+    const dataApi = await axios(API_URL_GENRES);
     const dataGenreApi = await dataApi.data.results.map(genre => genre.name);
     return dataGenreApi;
 }
 
+const getGenres2 = async() => {
+    const dataApi = await axios(API_URL_GENRES);
+    const dataFilter = await dataApi.data.results.map(genre => genre.name);
+    return dataFilter;
+}
+
 module.exports ={
-    getGenres
+    getGenres,
+    getGenres2
 }

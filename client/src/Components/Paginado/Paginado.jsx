@@ -16,7 +16,7 @@ export default function Paginado ({ numOfPages, pagination }){
 
     return (
         <nav className={styles.nav}>
-            <ul className={styles.container} style={{display: "flex"}}>{renderPage}</ul>
+            <ul className={styles.container} >{renderPage}</ul>
         </nav>
     )
 }

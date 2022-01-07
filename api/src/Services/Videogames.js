@@ -4,11 +4,11 @@ const axios = require('axios');
 
 
 const getDataApi = async() => {
-    let dataFirstPage = await axios.get(API_URL_GAMES_FIRST_PAGE); 
+    let dataFirstPage = await axios(API_URL_GAMES_FIRST_PAGE); 
     dataFirstPage = await dataFirstPage.data.results;
-    let dataSecondPage = await axios.get(API_URL_GAMES_SECOND_PAGE); 
+    let dataSecondPage = await axios(API_URL_GAMES_SECOND_PAGE); 
     dataSecondPage = await dataSecondPage.data.results;    
-    let dataThirdPage = await axios.get(API_URL_GAMES_THIRD_PAGE); 
+    let dataThirdPage = await axios(API_URL_GAMES_THIRD_PAGE); 
     dataThirdPage = await dataThirdPage.data.results
 
     const dataApi = await [...dataFirstPage, ...dataSecondPage, ...dataThirdPage];
@@ -29,25 +29,62 @@ const getDataApi = async() => {
 
 const getDataDb = async() => {
     let dataDb = await Videogame.findAll({
-        include: {
+        include:{
             model: Genre,
                 attributes: ['name'],
                 through: { 
                     attributes: [] 
                 }
-        }
+            }      
+        
     })
     return dataDb;
 }
 
+
 const getAllInformation = async() => {
     let dataApi = await getDataApi();
     let dataDb = await getDataDb();
-    let all = dataDb.concat(dataApi)
-    return all
+    const dataDbMap = await dataDb.map(game => {
+        return {
+            id: game.id,
+            name: game.name,
+            description: game.description,
+            released: game.released,
+            rating: game.rating,
+            image: game.image,
+            platforms: game.platform,
+            genres: game.genres.map(ele => ele.name),
+            createInDb: game.createInDb
+        }
+    })
+    let all = dataDbMap.concat(dataApi)
+    return all;
 }
+
+
 
 
 module.exports = {
     getAllInformation
 }
+
+// const getDataDb = async() => {
+//     let dataDb = await Videogame.findAll({
+//         include: [
+//             {model: Genre,
+//                 attributes: ['name'],
+//                 through: { 
+//                     attributes: [] 
+//                 }
+//             },
+//             {model: Platform,
+//                 attributes: ['name'],
+//                 through: { 
+//                     attributes: [] 
+//                 }
+//             }       
+//         ]
+//     })
+//     return dataDb;
+// }

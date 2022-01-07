@@ -1,4 +1,4 @@
-import { GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_DETAILS, DELETE_STATE, ORDER_BY_NAME, FILTER_CREATE, FILTER_BY_GENRE, FILTER_BY_RATING, GET_NAME_VIDEOGAME, POST_VIDEOGAME, GET_PLATFORMS } from "../Actions/Constantes"
+import { GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_DETAILS, DELETE_STATE, ORDER_BY_NAME, FILTER_CREATE, FILTER_BY_GENRE, FILTER_BY_RATING, GET_NAME_VIDEOGAME, GET_PLATFORMS } from "../Actions/Constantes"
 
 const initialState = {
     videogames: [], // -----> este siempre va hacer el Array que debo mostrar
@@ -27,10 +27,10 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 platforms: action.payload.data
             }
-        case POST_VIDEOGAME:
-            return {
-                ...state
-            }
+        // case POST_VIDEOGAME:
+        //     return {
+        //         ...state
+        //     }
         case GET_VIDEOGAMES_DETAILS: 
             return{
                 ...state,
@@ -42,46 +42,50 @@ export default function rootReducer(state = initialState, action){
                 videoGameDetails: {}
             }
         case ORDER_BY_NAME:
-            let sortedArr = action.payload === 'asc' ? state.videogames.sort( function (a,b){
-                if(a.name > b.name){
-                    return 1;
-                }
-                if(b.name > a.name){
-                    return -1
-                }
+            let filterByName = action.payload === 'asc' ? 
+                [...state.videogames].sort((a,b) => {                    
+                if(a.name > b.name) return 1;
+                if(b.name > a.name) return -1;
                 return 0;
-            }):
-            state.videogames.sort(function(a,b){
-                if(a.name > b.name){
-                    return -1;
-                }
-                if(b.name > a.name){
-                    return 1
-                }
+                })
+            :   [...state.videogames].sort((a,b) => {
+                if(a.name > b.name) return -1;
+                if(b.name > a.name) return 1;
                 return 0
-            })
+                })
             return {
                 ...state,
-                videogames: sortedArr
+                videogames: filterByName
             }
         case FILTER_CREATE: 
-            const all = state.allVideogames;
-            const createfilter = action.payload === 'create' ? all.filter(ele => ele.createInDb) : all.filter(ele => !ele.createInDb);
+                const createFilter = action.payload === 'Created' ? 
+                [...state.videogames].filter(game => game.createInDb)
+                : [...state.videogames].filter(game => !game.createInDb)
             return {  
                 ...state,
-                videogames: action.payload === 'All' ? state.allVideogames : createfilter
+                videogames: action.payload === 'All' ? [...state.allVideogames] : createFilter
             }
         case FILTER_BY_GENRE: 
             const allVideogames2 = state.allVideogames;
             const videoGamesFilter = allVideogames2.filter(ele => ele.genres.includes(action.payload));
+            // const filterByGenre = [...state.allVideogames].filter(ele => ele.genres.includes(action.payload));
             return {
                 ...state,
+                // videogames: filterByGenre
                 videogames: videoGamesFilter
             }
         case FILTER_BY_RATING: 
-            const allVideogames3 = state.allVideogames;
-            parseFloat(action.payload);
-            const filterByRating = allVideogames3.filter(ele => ele.rating == action.payload);
+            const filterByRating = action.payload === 'Min' ? 
+                [...state.videogames].sort((a, b) =>{
+                    if(a.rating > b.rating) return 1;
+                    if(b.rating > a.rating) return -1
+                    return 0;
+                })
+            :   [...state.videogames].sort((a,b) => {
+                if(a.rating > b.rating) return -1;
+                if(b.rating > a.rating) return 1
+                return 0
+            });
             return {
                 ...state, 
                 videogames: filterByRating

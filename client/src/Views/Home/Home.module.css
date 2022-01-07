@@ -86,3 +86,13 @@ select:hover{
 option{
     color: black;
 }
+
+.loading{
+    width: 20rem;
+    height: 20rem;
+    margin: 5rem auto;
+    background-image: url('../../Img/Loading.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

@@ -14,14 +14,13 @@ export default function Home (){
     const genres = useSelector(state => state.genres);
     
     const [currentPage, setCurrentPage] = useState(1); 
-    const [videogamePerPage] = useState(5) 
-    const [order, setOrder] = useState('')
+    const [videogamePerPage] = useState(15);
     
     let lastVideoGameInPage = currentPage * videogamePerPage;  
     let firstVideoGameInPage = lastVideoGameInPage - videogamePerPage;  
 
     let currentVideoGamesItems = videogames?.slice(firstVideoGameInPage, lastVideoGameInPage); 
-    const numOfPages = Math.ceil(videogames.length / videogamePerPage); 
+    const numOfPages = Math.ceil(videogames?.length / videogamePerPage); 
 
     function pagination (e, page){
         e.preventDefault();
@@ -32,13 +31,11 @@ export default function Home (){
         e.preventDefault();
         dispatch(orderByname(e.target.value));
         setCurrentPage(1); 
-        setOrder(`Ordenado ${e.target.value}`); 
     }
 
     function handleFilterCreate(e){
         e.preventDefault();
-        dispatch(filterCreate(e.target.value))
-        console.log(e.target.value)
+        dispatch(filterCreate(e.target.value));
     }
 
     function handleFilterByGenre(e){
@@ -63,9 +60,9 @@ export default function Home (){
                     </div>
                     <div>
                         <select onChange={e => handelFilterByName(e)} className={styles}>
-                            <option selected disabled>--Selecciona--</option>
-                            <option value="asc">Ascendente</option>
-                            <option value="desc">Descendente</option>
+                            <option selected disabled>--Select--</option>
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
                         </select>
                     </div>
                 </div>
@@ -75,10 +72,10 @@ export default function Home (){
                     </div>
                     <div>
                         <select onChange={e => handleFilterCreate(e)}>
-                            <option selected disabled>--Selecciona--</option>
-                            <option value="All">Todos</option>
-                            <option value="create">Creados</option>
-                            <option value="api">Existente</option>
+                            <option selected disabled>--Select--</option>
+                            <option value="All">All</option>
+                            <option value="Created">Created</option>
+                            <option value="Api">API</option>
                         </select>
                     </div>
                 </div>
@@ -88,7 +85,7 @@ export default function Home (){
                     </div>
                     <div>
                         <select className={styles.selects} onChange={e => handleFilterByGenre(e)}> {/* size='4' */}
-                            <option selected disabled>--Selecciona--</option>
+                            <option selected disabled>--Select--</option>
                             {
                                 genres?.map(genre => (
                                     <option key={genre.id} name={genre.name} value={genre.name}>{genre.name}</option>
@@ -102,21 +99,22 @@ export default function Home (){
                     <p className={styles.pOrderByName}>Filter By Rating</p>
                     </div>
                     <div>
-                        <select onChange={handleFilterByRating}>
-                            <option selected disabled>--Selecciona--</option>
-                            {
-                                videogames?.map(game => (
-                                    <option key={game.id} name={game.name} value={game.rating}>{game.rating}</option>
-                                    ))
-                                }
+                        <select onChange={e => handleFilterByRating(e)} className={styles}>
+                            <option selected disabled>--Select--</option>
+                            <option value='All'>All Rating</option>
+                            <option value="Min">Min</option>
+                            <option value="Max">Max</option>
                         </select>
                     </div>
                 </div>
             </section>
-            <Cards videogames={currentVideoGamesItems} />
+            {
+                videogames ?
+                <Cards videogames={currentVideoGamesItems} />
+                : <p className={styles.loading}></p>
+            }
             <Paginado numOfPages={numOfPages} pagination={pagination}/>
         </main>
     )
 }
 
-/*  Falta filtrar bien por genero los de la base de datos y que se puedan elegir mas de un genero */

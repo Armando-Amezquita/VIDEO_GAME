@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const { Genre } = require('../db');
-const { getGenres } = require('../Services/Genre')
+const { getGenres, getGenres2 } = require('../Services/Genre')
 
 const router = Router();
 
 router.get('/', async(req,res) => {
-    const dataGenresApi = await getGenres();
+    const dataGenresApi = await getGenres2();
     dataGenresApi.forEach(element => {
         Genre.findOrCreate({
             where: {name: element}
