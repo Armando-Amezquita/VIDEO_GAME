@@ -1,7 +1,7 @@
 import { GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_DETAILS, DELETE_STATE, ORDER_BY_NAME, FILTER_CREATE, FILTER_BY_GENRE, FILTER_BY_RATING, GET_NAME_VIDEOGAME, GET_PLATFORMS } from "../Actions/Constantes"
 
 const initialState = {
-    videogames: [], // -----> este siempre va hacer el Array que debo mostrar
+    videogames: [], 
     allVideogames: [],
     genres: [],
     videoGameDetails: {},
@@ -27,10 +27,6 @@ export default function rootReducer(state = initialState, action){
                 ...state,
                 platforms: action.payload.data
             }
-        // case POST_VIDEOGAME:
-        //     return {
-        //         ...state
-        //     }
         case GET_VIDEOGAMES_DETAILS: 
             return{
                 ...state,
@@ -68,10 +64,8 @@ export default function rootReducer(state = initialState, action){
         case FILTER_BY_GENRE: 
             const allVideogames2 = state.allVideogames;
             const videoGamesFilter = allVideogames2.filter(ele => ele.genres.includes(action.payload));
-            // const filterByGenre = [...state.allVideogames].filter(ele => ele.genres.includes(action.payload));
             return {
                 ...state,
-                // videogames: filterByGenre
                 videogames: videoGamesFilter
             }
         case FILTER_BY_RATING: 

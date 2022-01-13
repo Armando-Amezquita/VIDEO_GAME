@@ -1,31 +1,37 @@
 const { Router } = require('express');
-const { getAllInformation } = require('../Services/Videogames');
-
-const router = Router()
-
-// router.get('/otra', async (req, res) => {
-//     const data = await getAllInformation();
-//     const set = new Set(data.map(ele => ele.name))
-//     const dataSet = [...set]
-//     console.log(dataSet)
-//     const datafilter = await dataSet.map(ele => ele.name)
-//     res.json(dataSet)
-// })
+const router = Router();
+const { getAllInformation, getSearchInformationApi } = require('../Services/Videogames');
+const {Videogame, Genre} = require('../db')
 
 router.get('/', async(req,res) => {
     const {name} = req.query;
-    const data = await getAllInformation();
     if(name){
-        const filterByName = data.filter(game => game.name.toUpperCase().includes(name.toUpperCase()))
-        let filterFirstFifteen = [];
-        for (let i = 0; i < 15; i++) {
-            filterFirstFifteen.push(filterByName[i]);
+        try {
+            const dataDb = await Videogame.findAll({
+                where: {
+                    name: name.charAt(0).toUpperCase() + name.slice(1)
+                },
+                include:{
+                    model: Genre,
+                    attributes: ['name'],
+                    through: { 
+                        attributes: [] 
+                    }
+                }
+            });
+            const dataApi = await getSearchInformationApi(name);
+            const allVideogames = dataDb.concat(dataApi);
+            res.json(allVideogames);
+        } catch (error) {
+            console.log(error)
         }
-        filterFirstFifteen = filterFirstFifteen.filter(ele => ele);
-        filterFirstFifteen.length? res.json(filterFirstFifteen) : res.json({message: 'No hay un juego con ese nombre', error: 504 });
-    }
-    else {
-        res.json(data);
+    }else{
+        try {
+            const data = await getAllInformation();
+            res.json(data);
+        } catch (error) {
+            console.log(error)
+        }
     }
 });
 

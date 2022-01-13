@@ -1,8 +1,6 @@
 import axios from 'axios';
 import constantes from '../Constantes';
-import { GET_ALL_VIDEOGAMES, GET_GENRES, GET_VIDEOGAMES_DETAILS, DELETE_STATE, ORDER_BY_NAME, FILTER_CREATE, FILTER_BY_GENRE, FILTER_BY_RATING, GET_NAME_VIDEOGAME , GET_PLATFORMS } from "./Constantes";
-
-
+import { GET_ALL_VIDEOGAMES, GET_NAME_VIDEOGAME, GET_GENRES, GET_VIDEOGAMES_DETAILS, DELETE_STATE, ORDER_BY_NAME, FILTER_CREATE, FILTER_BY_GENRE, FILTER_BY_RATING , GET_PLATFORMS } from "./Constantes";
 
 export const getVideogames = () => {
     return (dispatch) => {
@@ -11,7 +9,20 @@ export const getVideogames = () => {
             dispatch({type: GET_ALL_VIDEOGAMES, payload: data})
         })
     }
-}
+};
+export const getNameVideogames = (payload) => { 
+    return async function (dispatch){
+        try {
+            let game = await axios(`${constantes.VIDEOGAMES_URL}?name=${payload}`)
+            return dispatch({
+                type: GET_NAME_VIDEOGAME,
+                payload: game.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
 
 export const getGenres = () => {
     return async(dispatch) => {
@@ -33,8 +44,6 @@ export const getPlatforms = () => {
     }
 }
 
-
-
 export const postVideogame = (payload) => {
     return async() => {
         const data = await axios.post(constantes.POST_VIDEOGAME, payload); 
@@ -49,17 +58,6 @@ export const getVideoGamesDetails = (id)=>{
             dispatch({type: GET_VIDEOGAMES_DETAILS, payload: videogame.data})
         } catch (error) {
             console.error(error)
-        }
-    }
-}
-
-export const getDetails = (id) => { // --->>>> Get detalles API
-    return  async(dispatch) => {
-        try {
-            const videogame = await axios.get(`${constantes.VIDEOGAME_DETAILS_URL}detalles/${id}`);
-            dispatch({type: GET_VIDEOGAMES_DETAILS, payload: videogame.data});
-        } catch (error) {
-            console.log(error)
         }
     }
 }
@@ -99,16 +97,4 @@ export const filterByRating = (payload) => {
     }
 }
 
-export const getNameVideogames = (payload) => { 
-    return async function (dispatch){
-        try {
-            let game = await axios.get(`${constantes.VIDEOGAMES_URL}?name=${payload}`)
-            return dispatch({
-                type: GET_NAME_VIDEOGAME,
-                payload: game.data
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
-}
+

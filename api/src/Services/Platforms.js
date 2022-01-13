@@ -1,5 +1,3 @@
-// const { API_URL_PLATSFORMS } = require('../../Constantes');
-// const axios = require('axios');
 const {getAllInformation} = require('../Services/Videogames')
 
 const getPlatform = async() => {
@@ -11,12 +9,6 @@ const getPlatform = async() => {
     return ConvertirArray;
 
 }
-
-// const getPlatforms = async() => {
-//     const dataApi = await axios(API_URL_PLATSFORMS);
-//     const dataPlatformsApi = await dataApi.data.results.map(platform => platform.name)
-//     return dataPlatformsApi;
-// }
 
 module.exports ={
     getPlatform

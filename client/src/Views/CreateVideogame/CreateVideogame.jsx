@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function validate (input){
     let errors = {};
-    const regexRating = /^[0-5]$/g;
+    const regexRating = /^[0-9]$/g;
     const regexName = /^[A-Z]/g;
     const regexDescription = /^[A-Z]/g;
 
@@ -76,7 +76,7 @@ export default function CreateVideogame (){
         if(e.target.value !== regexImage.test(e.target.value) || !e.target.value){
             setState({
                 ...state,
-                image: 'https://www.pcquest.com/wp-content/uploads/2015/06/the-games-logo-272khb4.jpg'
+                image: 'https://cdn.arstechnica.net/wp-content/uploads/2020/12/ars-games-of-the-year-2020-760x380.jpg'
             })
         }
     }
@@ -97,7 +97,7 @@ export default function CreateVideogame (){
     const handleSubmit = async(e) => {
         e.preventDefault();
         dispatch(postVideogame(state))
-        alert('Videogame Created')
+        alert('Videogame Created');
         setState({
             name: '',
             description: '',
@@ -111,10 +111,12 @@ export default function CreateVideogame (){
 
     function handleChangeGenre (e){
         e.preventDefault();
-        setState({
-            ...state,
-            genre: [...state.genre, e.target.value]
-        });
+        if(!state.genre.includes(e.target.value)){
+            setState({
+                ...state,
+                genre: [...state.genre, e.target.value]
+            });
+        }
     }
     function handleChangePlatform (e){
         e.preventDefault();
