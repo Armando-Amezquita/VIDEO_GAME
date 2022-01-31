@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     released: {
@@ -27,8 +27,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: 'https://i.blogs.es/27d6c6/halo-infinite1/1366_2000.jpeg'
+      allowNull: true
     },
     platform: {
       type: DataTypes.ARRAY(DataTypes.STRING),
