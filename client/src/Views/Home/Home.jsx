@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Cards from "../../Components/Cards/Cards";
 import SearchBar from "../../Components/SearchBar/SearchBar";
 import Paginado from "../../Components/Paginado/Paginado";
 import { orderByname, filterCreate, filterByGenre, filterByRating } from "../../Actions";
-import styles from './Home.module.css'
+import styles from './Home.module.css';
 
 export default function Home (){
 

@@ -13,6 +13,7 @@ export default function Details (){
         dispatch(getVideoGamesDetails(id))
         return () => {dispatch(deleteState())} 
     }, [dispatch, id]);
+
     
     return (
         <>

@@ -10,7 +10,7 @@ export default function About (){
                     <div className={styles.presentation}>
                         <p className={styles.parrafos}>Hello...</p>
                         <h1 className={styles.titleName}>I'm Armando Amezquita Molina</h1>
-                        <p className={styles.parrafos}>I'm a Full-Stack developer software. </p>
+                        <p className={styles.parrafos}>I'm a Full-Stack Software Developer. </p>
                     </div>
                     <div className={styles.presentationImage}>
                     </div>

@@ -11,7 +11,6 @@ export default function SearchBar (){
     const dispatch = useDispatch();
     
     function handleReload (e){
-        e.preventDefault()
         dispatch(getVideogames())
     }
 

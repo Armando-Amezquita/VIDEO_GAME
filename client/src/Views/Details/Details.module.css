@@ -88,17 +88,17 @@
     width: 20rem;
     height: 20rem;
     margin: 5rem auto;
-    background-image: url('../../Img/Loading.gif');
+    background-image: url('../../Logos/giphy.gif');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .loadingCute{
-    width: 4rem;
-    height: 4rem;
+    width: 8rem;
+    height: 8rem;
     margin: auto auto;
-    background-image: url('../../Img/Loading.gif');
+    background-image: url('../../Logos/giphy.gif');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

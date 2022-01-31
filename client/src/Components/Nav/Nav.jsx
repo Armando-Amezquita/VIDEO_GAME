@@ -8,6 +8,9 @@ export default function Nav () {
             <Link to='home' className={styles.underline}>
                 <p className={styles.font} >@ARMANDO-AMEZQUITA</p>
             </Link>
+            <Link to='home' className={styles.underline}>
+                <p className={styles.font}>Go Home</p>
+            </Link>
             <Link to='/about' className={styles.underline}>
                 <p className={styles.font}>About</p>
             </Link>

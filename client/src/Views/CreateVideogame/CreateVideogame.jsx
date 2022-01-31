@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {getGenres, postVideogame, getPlatforms} from '../../Actions/index';
 import styles from './CreateVideogame.module.css'
 import { useDispatch, useSelector } from "react-redux";
+import swal from 'sweetalert'
 
 
 function validate (input){
@@ -72,11 +73,12 @@ export default function CreateVideogame (){
 
 
     const handleImage = (e) => {
-        const regexImage = /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/;
+        const regexImage = /^((ftp|http|https):\/\/)?www\.([A-z]+)\.([A-z]{2,})/gi;
         if(e.target.value !== regexImage.test(e.target.value) || !e.target.value){
             setState({
                 ...state,
-                image: 'https://cdn.arstechnica.net/wp-content/uploads/2020/12/ars-games-of-the-year-2020-760x380.jpg'
+                // image: 'https://cdn.arstechnica.net/wp-content/uploads/2020/12/ars-games-of-the-year-2020-760x380.jpg'
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-3IPJ6WxDXjcBFEft2tZQNerNl_NqnNu__A&usqp=CAU'
             })
         }
     }
@@ -97,7 +99,7 @@ export default function CreateVideogame (){
     const handleSubmit = async(e) => {
         e.preventDefault();
         dispatch(postVideogame(state))
-        alert('Videogame Created');
+        swal('Videogame was Created');
         setState({
             name: '',
             description: '',
