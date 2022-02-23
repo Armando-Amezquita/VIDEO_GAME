@@ -1,0 +1,127 @@
+.detailsContainer{
+    height: auto;
+    padding-bottom: 4rem ;
+    background-color: #000;
+    color: white;
+
+}
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    padding-top: .1rem;
+    padding-bottom: 4rem;
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+    box-shadow:inset 0 0 10px #548CFF, 0 0 20px #548CFF, 0 0 30px #548CFF, 0 0 60px #548CFF;
+    border-radius: 1rem;
+}
+.title{
+    width: auto;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 2rem;
+    color:white;
+    text-shadow: 0 0 10px #548CFF, 0 0 20px #548CFF, 0 0 30px #548CFF, 0 0 60px #548CFF;
+    position: relative;
+    top: 1.5rem;
+    font-size: 2.5rem;
+    background-color: transparent;
+}
+.imgDetails{
+    width: 99%;
+    height: 100%;
+    border-radius: .5rem;
+    border: none;
+}
+.containerCardDetails{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+}
+.containerImg {
+    width: 100%;
+    text-align: center;
+}
+
+.titleDetails{
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 0 10px #21f3d0, 0 0 20px #21f3d0;
+    margin: 0 auto;
+}
+.titlePlatforms{
+    font-size: 1.3rem;
+    margin: 1rem 0;
+    color: #21f3d0;
+}
+.containerDivision{
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin: 0 auto;
+}
+.containerCabine{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.containerPlaforms{
+    width: 50%;
+    height: auto;
+}
+.containerGenre{
+    width: 50%;
+    padding-left: 30%;
+}
+.biñeta{
+    list-style-type: circle;
+}
+
+.loading{
+    width: 20rem;
+    height: 20rem;
+    margin: 5rem auto;
+    background-image: url('../../Logos/giphy.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.loadingCute{
+    width: 8rem;
+    height: 8rem;
+    margin: auto auto;
+    background-image: url('../../Logos/giphy.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.containerDescription{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+.pDescription{
+    font-size: 1.2;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.titleDescription{
+    font-size: 2rem;
+    color: white;
+    text-shadow: 0 0 10px #21f3d0, 0 0 20px #21f3d0;
+    margin: 0 auto;
+}

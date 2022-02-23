@@ -1,0 +1,98 @@
+.containerHome{
+    width: 100%;
+    height: auto;
+    padding-top: 3rem;
+    background-color: #000;
+    margin-bottom: 3rem;
+}
+/* --------------------->>>> Search Bar <<<< ----------------------  */
+.SearchBar {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* --------------------->>>> Container Filters <<<< ----------------------  */
+.containerFilters {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    height: 5rem;
+    margin: 4rem auto;
+}
+/* --------------------->>>> Filter By Name <<<< ----------------------  */
+.filterByName{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 12rem;
+    height: 6rem;
+    background-color: black;
+    box-shadow: 0 0 5px #21f3d0, 0 0 10px #21f3d0;
+    border-radius: .8rem;
+}  
+.pOrderByName{
+    color: #21f3d0;
+    margin: .5rem 0;
+}
+/* --------------------->>>> Filter By Create Or Existing <<<< ----------------------  */
+.filterByCreateOrExisting {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 14rem;
+    height: 6rem;
+    background-color: black;
+    box-shadow: 0 0 5px #21f3d0, 0 0 10px #21f3d0;
+    border-radius: .8rem;
+}
+/* --------------------->>>> Filter By Genre <<<< ----------------------  */
+.filterByGenre {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 13rem;
+    height: 6rem;
+    background-color: black;
+    box-shadow: 0 0 5px #21f3d0, 0 0 10px #21f3d0;
+    border-radius: .8rem;
+}
+/* --------------------->>>> Filter By Rating <<<< ----------------------  */
+.filterByRating{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 13rem;
+    height: 6rem;
+    background-color: black;
+    box-shadow: 0 0 5px #21f3d0, 0 0 10px #21f3d0;
+    border-radius: .8rem;
+}
+
+select {
+    border: 1px solid #fff;
+    background-color: transparent;
+    padding: 5px;
+    color: white;
+    border-radius: .3rem;
+}
+select:hover{
+    cursor: pointer;
+}
+option{
+    color: black;
+}
+
+.loading{
+    width: 20rem;
+    height: 20rem;
+    margin: 5rem auto;
+    background-image: url('../../Logos/giphy.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
